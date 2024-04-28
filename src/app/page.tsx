@@ -2,9 +2,8 @@
 
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { getQuiz } from "./actions";
-import { useFormState } from "react-dom";
-import { useEffect, useRef, useState } from "react";
+import { Fragment } from "react";
+import { useChat } from "ai/react";
 import SubmitButton from "./SubmitButton";
 
 type TQuiz = {
@@ -13,29 +12,42 @@ type TQuiz = {
 };
 
 const Home = () => {
-  const [quiz, setQuiz] = useState<TQuiz | undefined>(undefined);
-  const ref = useRef<HTMLFormElement | null>(null);
-  const [state, action] = useFormState(getQuiz, undefined);
-
-  useEffect(() => {
-    if (state?.title && state.content) {
-      ref.current?.reset();
-      setQuiz(state);
-    }
-  }, [state]);
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    api: "/api",
+  });
 
   return (
     <main className="bg-[#F0F0F0] p-10 h-screen">
       <div className="bg-[#FFFFFF] rounded-lg h-full max-w-4xl mx-auto px-8 py-4">
         <div className="flex flex-col gap-8 h-full">
           <ScrollArea className="rounded-lg border border-[#777474] border-opacity-20 grow px-4 py-9">
-            <div className="flex gap-9 flex-col">
-              {quiz?.title && <h1 className="text-3xl">{quiz.title}</h1>}
-              {quiz?.content && <p className="text-lg">{quiz.content}</p>}
+            <div className="flex gap-4 flex-col">
+              {messages.map((message, i) => {
+                return (
+                  <Fragment key={i}>
+                    {message.role === "user" ? (
+                      <div className="flex justify-end">
+                        <p className="px-4 py-2 w-2/3 bg-[#D9FDD3] rounded-lg">
+                          {message.content}
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="px-4 py-2 w-2/3 bg-[#F0F0F0] rounded-lg">
+                        {message.content}
+                      </p>
+                    )}
+                  </Fragment>
+                );
+              })}
             </div>
           </ScrollArea>
-          <form action={action} ref={ref} className="flex gap-8">
-            <Input name="prompt" placeholder="Enter prompt here..." />
+          <form onSubmit={handleSubmit} className="flex gap-8">
+            <Input
+              name="prompt"
+              value={input}
+              placeholder="Enter prompt here..."
+              onChange={handleInputChange}
+            />
             <SubmitButton />
           </form>
         </div>
