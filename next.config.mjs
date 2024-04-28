@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    staticPageGenerationTimeout: 60,
+};
 
 export default nextConfig;

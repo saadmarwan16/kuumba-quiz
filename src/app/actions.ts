@@ -17,7 +17,7 @@ export const getQuiz = async (_: any, form: FormData) => {
     ],
     model: "gpt-4",
   });
-  console.log(completion.choices[0].message.content);
+  //   console.log(completion.choices[0].message.content);
 
   return {
     title: prompt,
