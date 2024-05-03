@@ -9,17 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@langchain/core": "^0.1.61",
+    "@langchain/openai": "^0.0.28",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
     "@t3-oss/env-nextjs": "^0.10.1",
     "ai": "^3.0.35",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "langchain": "^0.1.36",
     "lucide-react": "^0.376.0",
     "next": "14.2.3",
     "openai": "^4.38.5",
     "react": "^18",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18",
+    "react-icons": "^5.2.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.4"
