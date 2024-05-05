@@ -12,15 +12,19 @@ interface AnswerProps {
   quiz: Output;
   question: number;
   setQuestion: () => void;
+  setAnswer: (questionState: TQuestionState) => void;
+  questionState: TQuestionState;
+  answerState: TQuestionState[];
 }
 
 const Answer: FunctionComponent<AnswerProps> = ({
   question,
   quiz,
   setQuestion,
+  setAnswer,
+  questionState,
+  answerState,
 }) => {
-  const [questionState, setQuestionState] = useState<TQuestionState>(undefined);
-
   return (
     <section className="flex flex-col items-center gap-9 flex-[1_0_0] self-stretch bg-[#F2F2F2] px-4 py-5 lg:justify-center lg:gap-20 lg:px-12 lg:py-10">
       <DndProvider backend={HTML5Backend}>
@@ -31,24 +35,24 @@ const Answer: FunctionComponent<AnswerProps> = ({
               key={i}
               name={option}
               answer={quiz.questions[question].answer}
-              setAnswer={(val) => setQuestionState(val)}
+              setAnswer={(val) => setAnswer(val)}
               questionState={questionState}
             />
           ))}
         </div>
       </DndProvider>
       <div className="flex lg:hidden justify-center items-start gap-3 flex-wrap">
-        <CheckMarks />
+        <CheckMarks answerState={answerState} />
       </div>
       <Button
         className="max-w-[350px] min-w-[200px] w-full"
         disabled={!questionState}
         onClick={() => {
           setQuestion();
-          setQuestionState(undefined);
+          setAnswer(undefined);
         }}
       >
-        Next
+        {question === quiz.questions.length - 1 ? "Continue" : "Next"}
       </Button>
     </section>
   );

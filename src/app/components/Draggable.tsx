@@ -20,10 +20,19 @@ const Draggable: FunctionComponent<DraggableProps> = ({
     type: "box",
     item: { name },
     end: (item) => {
+      alert(
+        `The chosen answer is: ${item.name} and the correct answer is ${answer}`
+      );
       if (item.name === answer) {
-        setAnswer("correct");
+        setAnswer({
+          choice: item.name,
+          state: "correct",
+        });
       } else {
-        setAnswer("wrong");
+        setAnswer({
+          choice: item.name,
+          state: "wrong",
+        });
       }
     },
     collect: (monitor) => ({

@@ -45,15 +45,15 @@ const QuizPage: FunctionComponent<QuizPageProps> = () => {
             <Draggable name="Michael Jackson" />
           </div> */}
         </DndProvider>
-        <div className="flex justify-center items-start gap-3 flex-wrap">
+        {/* <div className="flex justify-center items-start gap-3 flex-wrap">
           <CheckMarks />
-        </div>
+        </div> */}
         <Button className="max-w-[350px] min-w-[200px] w-full">Next</Button>
       </section>
 
-      <section className="hidden lg:flex w-16 justify-center items-center shrink-0 self-stretch [background:#FFF] p-4 flex-col gap-6">
+      {/* <section className="hidden lg:flex w-16 justify-center items-center shrink-0 self-stretch [background:#FFF] p-4 flex-col gap-6">
         <CheckMarks />
-      </section>
+      </section> */}
     </main>
   );
 };

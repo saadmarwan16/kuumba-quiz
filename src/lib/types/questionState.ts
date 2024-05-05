@@ -1,1 +1,6 @@
-export type TQuestionState = "correct" | "wrong" | undefined;
+export type TQuestionState =
+  | {
+      state: "correct" | "wrong";
+      choice: string;
+    }
+  | undefined;

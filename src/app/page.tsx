@@ -6,12 +6,37 @@ import Typography from "@/components/ui/typography";
 import { useFormState } from "react-dom";
 import { generateQuiz } from "./actions";
 import Quiz from "./components/Quiz";
+import Results from "./components/Results";
+import { useEffect, useState } from "react";
+import { TQuestionState } from "@/lib/types/questionState";
 
 const Home = () => {
+  const [question, setQuestion] = useState(0);
+  const [questionState, setQuestionState] = useState<TQuestionState>(undefined);
+  const [answerState, setAnswerState] = useState<TQuestionState[]>([]);
   const [state, action] = useFormState(generateQuiz, undefined);
+  console.log(state)
+
+  useEffect(() => {
+    if (typeof questionState !== "undefined")
+      setAnswerState((prev) => [...prev, questionState]);
+  }, [questionState]);
 
   if (state && typeof state !== "string") {
-    return <Quiz quiz={state} />;
+    if (question >= state.questions.length) {
+      return <Results quiz={state} results={answerState} />;
+    } else {
+      return (
+        <Quiz
+          quiz={state}
+          question={question}
+          questionState={questionState}
+          answerState={answerState}
+          setQuestion={() => setQuestion((val) => val + 1)}
+          setAnswer={(val) => setQuestionState(val)}
+        />
+      );
+    }
   } else {
     return (
       <main className="bg-[#F0F0F0] p-10 h-screen">

@@ -48,7 +48,7 @@ const Droppable: FunctionComponent<DroppableProps> = ({ questionState }) => {
           </>
         )}
 
-        {questionState === "correct" && (
+        {questionState?.state === "correct" && (
           <div
             className={`flex-[1_0_0] self-stretch bg-[#188351] rounded-full`}
           >
@@ -58,7 +58,7 @@ const Droppable: FunctionComponent<DroppableProps> = ({ questionState }) => {
           </div>
         )}
 
-        {questionState === "wrong" && (
+        {questionState?.state === "wrong" && (
           <div
             className={`flex-[1_0_0] self-stretch bg-[#EC4034] rounded-full`}
           >
