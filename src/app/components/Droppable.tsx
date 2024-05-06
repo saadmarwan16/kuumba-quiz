@@ -6,12 +6,16 @@ import { TQuestionState } from "@/lib/types/questionState";
 
 interface DroppableProps {
   questionState: TQuestionState;
+  answer: string;
 }
 
-const Droppable: FunctionComponent<DroppableProps> = ({ questionState }) => {
+const Droppable: FunctionComponent<DroppableProps> = ({
+  questionState,
+  answer,
+}) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: "box",
-    drop: () => ({ name: "Dustbin" }),
+    accept: answer,
+    drop: () => ({ name: answer }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),

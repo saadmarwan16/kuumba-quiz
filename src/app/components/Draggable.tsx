@@ -17,22 +17,25 @@ const Draggable: FunctionComponent<DraggableProps> = ({
   questionState,
 }) => {
   const [_, drag] = useDrag(() => ({
-    type: "box",
+    type: answer,
     item: { name },
-    end: (item) => {
-      alert(
-        `The chosen answer is: ${item.name} and the correct answer is ${answer}`
-      );
-      if (item.name === answer) {
-        setAnswer({
-          choice: item.name,
-          state: "correct",
-        });
-      } else {
-        setAnswer({
-          choice: item.name,
-          state: "wrong",
-        });
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult<{ name: string }>();
+      if (item && dropResult) {
+        alert(
+          `The chosen answer is: ${item.name} and the correct answer is ${dropResult.name}`
+        );
+        if (item.name === dropResult.name) {
+          setAnswer({
+            choice: item.name,
+            state: "correct",
+          });
+        } else {
+          setAnswer({
+            choice: item.name,
+            state: "wrong",
+          });
+        }
       }
     },
     collect: (monitor) => ({

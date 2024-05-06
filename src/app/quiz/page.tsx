@@ -37,7 +37,7 @@ const QuizPage: FunctionComponent<QuizPageProps> = () => {
 
       <section className="flex flex-col items-center gap-9 flex-[1_0_0] self-stretch bg-[#F2F2F2] px-4 py-5 lg:justify-center lg:gap-20 lg:px-12 lg:py-10">
         <DndProvider backend={HTML5Backend}>
-          <Droppable questionState={undefined} />
+          {/* <Droppable questionState={undefined} /> */}
           {/* <div className="flex items-center gap-[1.5rem_1rem] flex-wrap justify-center">
             <Draggable name="Benjamin Franklin" />
             <Draggable name="Barack Obama" />
